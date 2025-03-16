@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd"
+        objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+    <changeSet id="1" author="tlist">
+        <dropForeignKeyConstraint baseTableName="card_construction_object_link" constraintName="fk_carconobj_on_card"/>
+    </changeSet>
+    <changeSet id="2" author="tlist">
+        <dropForeignKeyConstraint baseTableName="card_construction_object_link"
+                                  constraintName="fk_carconobj_on_construction_object"/>
+    </changeSet>
+    <changeSet id="3" author="tlist">
+        <addColumn tableName="CARD">
+            <column name="CONSTRUCTION_OBJECT_ID" type="UUID"/>
+        </addColumn>
+    </changeSet>
+    <changeSet id="4" author="tlist">
+        <addForeignKeyConstraint baseColumnNames="CONSTRUCTION_OBJECT_ID" baseTableName="CARD"
+                                 constraintName="FK_CARD_ON_CONSTRUCTION_OBJECT" referencedColumnNames="ID"
+                                 referencedTableName="CONSTRUCTION_OBJECT"/>
+    </changeSet>
+    <changeSet id="5" author="tlist">
+        <dropTable cascadeConstraints="true" tableName="card_construction_object_link"/>
+    </changeSet>
+</databaseChangeLog>

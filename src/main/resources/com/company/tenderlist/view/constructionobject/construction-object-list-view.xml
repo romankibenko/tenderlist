@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<view xmlns="http://jmix.io/schema/flowui/view"
+      xmlns:c="http://jmix.io/schema/flowui/jpql-condition"
+      title="msg://constructionObjectListView.title"
+      focusComponent="constructionObjectsDataGrid">
+    <data>
+        <collection id="constructionObjectsDc"
+                    class="com.company.tenderlist.entity.ConstructionObject">
+            <fetchPlan extends="_base"/>
+            <loader id="constructionObjectsDl" readOnly="true">
+                <query>
+                    <![CDATA[select e from ConstructionObject e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+        <urlQueryParameters>
+            <genericFilter component="genericFilter"/>
+            <pagination component="pagination"/>
+        </urlQueryParameters>
+    </facets>
+    <actions>
+        <action id="selectAction" type="lookup_select"/>
+        <action id="discardAction" type="lookup_discard"/>
+    </actions>
+    <layout>
+        <genericFilter id="genericFilter"
+                       dataLoader="constructionObjectsDl">
+            <properties include=".*"/>
+        </genericFilter>
+        <hbox id="buttonsPanel" classNames="buttons-panel">
+            <button id="createButton" action="constructionObjectsDataGrid.create"/>
+            <button id="editButton" action="constructionObjectsDataGrid.edit"/>
+            <button id="removeButton" action="constructionObjectsDataGrid.remove"/>
+            <simplePagination id="pagination" dataLoader="constructionObjectsDl"/>
+        </hbox>
+        <dataGrid id="constructionObjectsDataGrid"
+                  width="100%"
+                  minHeight="20em"
+                  dataContainer="constructionObjectsDc"
+                  columnReorderingAllowed="true">
+            <actions>
+                <action id="create" type="list_create"/>
+                <action id="edit" type="list_edit"/>
+                <action id="remove" type="list_remove"/>
+            </actions>
+            <columns resizable="true">
+                <column property="nameOfConstructionObject"/>
+                <column property="address"/>
+            </columns>
+        </dataGrid>
+        <hbox id="lookupActions" visible="false">
+            <button id="selectButton" action="selectAction"/>
+            <button id="discardButton" action="discardAction"/>
+        </hbox>
+    </layout>
+</view>

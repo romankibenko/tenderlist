@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<view xmlns="http://jmix.io/schema/flowui/view"
+      title="msg://cardDetailView.title"
+      focusComponent="form">
+    <data>
+        <collection id="contractingCompaniesDc" class="com.company.tenderlist.entity.ContractingCompany">
+            <fetchPlan extends="_base"/>
+            <loader id="contractingCompaniesDl" readOnly="true">
+                <query>
+                    <![CDATA[select e from ContractingCompany e]]>
+                </query>
+            </loader>
+        </collection>
+        <instance id="cardDc"
+                  class="com.company.tenderlist.entity.Card">
+            <fetchPlan extends="_base">
+                <property name="constructionObject" fetchPlan="_base"/>
+                <property name="projectManagerName" fetchPlan="_base"/>
+                <property name="nameOfContractingCompany" fetchPlan="_base"/>
+            </fetchPlan>
+            <loader id="cardDl"/>
+        </instance>
+        <collection id="constructionObjectsDc" class="com.company.tenderlist.entity.ConstructionObject">
+            <fetchPlan extends="_base"/>
+            <loader id="constructionObjectsDl" readOnly="true">
+                <query>
+                    <![CDATA[select e from ConstructionObject e]]>
+                </query>
+            </loader>
+        </collection>
+        <collection id="projectManagersDc" class="com.company.tenderlist.entity.ProjectManager">
+            <fetchPlan extends="_base"/>
+            <loader id="projectManagersDl" readOnly="true">
+                <query>
+                    <![CDATA[select e from ProjectManager e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+    </facets>
+    <actions>
+        <action id="saveAction" type="detail_saveClose"/>
+        <action id="closeAction" type="detail_close"/>
+    </actions>
+    <layout>
+        <formLayout id="form" dataContainer="cardDc" css="--vaadin-input-field-placeholder-color:DarkGray;">
+            <responsiveSteps>
+                <responsiveStep minWidth="0" columns="1"/>
+                <responsiveStep minWidth="40em" columns="2"/>
+            </responsiveSteps>
+            <integerField id="numberOfCardField" property="numberOfCard" label="msg://numberOfCardField.label"
+                          placeholder="msg://numberOfCardField.placeholder"/>
+            <select id="tenderStatusField" property="tenderStatus" placeholder="msg://tenderStatusField.placeholder"/>
+            <select id="nameField" property="name" placeholder="msg://nameField.placeholder"/>
+            <entityComboBox id="constructionObjectField" property="constructionObject"
+                            itemsContainer="constructionObjectsDc"
+                            placeholder="msg://constructionObjectField.placeholder"/>
+            <entityComboBox id="projectManagersComboBox" itemsContainer="projectManagersDc"
+                            property="projectManagerName" placeholder="msg://projectManagersComboBox.placeholder"/>
+            <datePicker id="dueDateField" property="dueDate" placeholder="дд/мм/гггг"/>
+            <datePicker id="planedTenderDateField" property="planedTenderDate" placeholder="дд/мм/гггг"/>
+            <datePicker id="factTenderDateField" property="factTenderDate" placeholder="дд/мм/гггг"/>
+            <datePicker id="changeTenderDateField" property="changeTenderDate" placeholder="дд/мм/гггг"/>
+            <select id="projectDocumentationTypeField" property="projectDocumentationType"
+                    placeholder="msg://projectDocumentationTypeField.placeholder"/>
+            <datePicker id="planedDateOfDocumentationIssueField" property="planedDateOfDocumentationIssue"
+                        placeholder="дд/мм/гггг"/>
+            <datePicker id="factDateOfDocumentationIssueField" property="factDateOfDocumentationIssue"
+                        placeholder="дд/мм/гггг"/>
+            <datePicker id="planedDateOfTechnicalTaskIssueField" property="planedDateOfTechnicalTaskIssue"
+                        placeholder="дд/мм/гггг"/>
+            <datePicker id="factDateOfTechnicalTaskIssueField" property="factDateOfTechnicalTaskIssue"
+                        placeholder="дд/мм/гггг"/>
+            <datePicker id="planedDateOfTechnicalTaskAgreeField" property="planedDateOfTechnicalTaskAgree"
+                        placeholder="дд/мм/гггг"/>
+            <datePicker id="factDateOfTechnicalTaskAgreeField" property="factDateOfTechnicalTaskAgree"
+                        placeholder="дд/мм/гггг"/>
+            <datePicker id="dateOfSheduleAgreeField" property="dateOfSheduleAgree"
+                        placeholder="дд/мм/гггг"/>
+            <datePicker id="dateOfContractConclusionField" property="dateOfContractConclusion"
+                        placeholder="дд/мм/гггг"/>
+            <textField id="numberOfContractField" property="numberOfContract"
+                       placeholder="msg://numberOfContractField.placeholder"/>
+            <entityComboBox id="nameOfContractingCompanyField" property="nameOfContractingCompany"
+                            itemsContainer="contractingCompaniesDc"
+                            placeholder="msg://nameOfContractingCompanyField.placeholder"/>
+            <textArea id="notesOfProjectManagerField" property="notesOfProjectManager" maxLength="500"
+                      valueChangeMode="EAGER"/>
+            <textArea id="notesOfManagerField" property="notesOfManager" maxLength="500" valueChangeMode="EAGER"/>
+        </formLayout>
+        <hbox id="detailActions">
+            <button id="saveAndCloseButton" action="saveAction"/>
+            <button id="closeButton" action="closeAction"/>
+        </hbox>
+    </layout>
+</view>

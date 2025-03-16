@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd"
+        objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+    <changeSet id="1" author="TenderList">
+        <addColumn tableName="CARD">
+            <column name="DATE_OF_CONTRACT_CONCLUSION" type="DATE"/>
+            <column name="DATE_OF_SHEDULE_AGREE" type="DATE"/>
+            <column name="FACT_DATE_OF_DOCUMENTATION_ISSUE" type="DATE"/>
+            <column name="FACT_DATE_OF_TECHNICAL_TASK_AGREE" type="DATE"/>
+            <column name="FACT_DATE_OF_TECHNICAL_TASK_ISSUE" type="DATE"/>
+            <column name="NUMBER_OF_CONTRACT" type="VARCHAR(20)"/>
+            <column name="PLANED_DATE_OF_DOCUMENTATION_ISSUE" type="DATE"/>
+            <column name="PLANED_DATE_OF_TECHNICAL_TASK_AGREE" type="DATE"/>
+            <column name="PLANED_DATE_OF_TECHNICAL_TASK_ISSUE" type="DATE"/>
+        </addColumn>
+    </changeSet>
+</databaseChangeLog>

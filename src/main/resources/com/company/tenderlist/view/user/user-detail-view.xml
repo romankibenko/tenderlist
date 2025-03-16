@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<view xmlns="http://jmix.io/schema/flowui/view"
+      title="msg://UserDetailView.title"
+      focusComponent="form">
+    <data>
+        <collection id="departmentsDc" class="com.company.tenderlist.entity.Department">
+            <loader id="departmentsDl" readOnly="true">
+                <query>
+                    <![CDATA[select e from Department e
+                    order by e.name asc]]>
+                </query>
+            </loader>
+            <fetchPlan extends="_base"/>
+        </collection>
+        <instance id="userDc"
+                  class="com.company.tenderlist.entity.User">
+            <fetchPlan extends="_base">
+                <property name="department" fetchPlan="_base"/>
+            </fetchPlan>
+            <loader/>
+        </instance>
+    </data>
+    <actions>
+        <action id="saveAction" type="detail_saveClose"/>
+        <action id="closeAction" type="detail_close"/>
+    </actions>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+    </facets>
+    <layout>
+        <formLayout id="form" dataContainer="userDc" css="--vaadin-input-field-placeholder-color:DarkGray;">
+            <textField id="usernameField" property="username" readOnly="true"
+            placeholder="Укажите логин"/>
+            <passwordField id="passwordField"
+                           label="msg://com.company.tenderlist.entity/User.password"
+                           required="true"
+                           visible="false"
+                           placeholder="Укажите пароль"/>
+            <passwordField id="confirmPasswordField"
+                           label="msg://confirmPassword"
+                           required="true"
+                           visible="false"/>
+            <textField id="firstNameField" property="firstName"
+                       placeholder="msg://firstNameField.placeholder"
+                       />
+            <textField id="secondNameField" property="secondName"
+            placeholder="Укажите отчество"/>
+            <textField id="lastNameField" property="lastName" placeholder="Укажите фамилию"/>
+            <emailField id="emailField" property="email" placeholder="msg://emailField.placeholder"
+                        label="msg://emailField.label"/>
+            <checkbox id="activeField" property="active"/>
+            <entityComboBox id="departmentField" property="department" itemsContainer="departmentsDc"
+                            placeholder="Выберите департамент"/>
+            <select id="officePositionField" property="officePosition"
+                    placeholder="Выберите должность"/>
+            <comboBox id="timeZoneField" property="timeZoneId" clearButtonVisible="true"
+                      placeholder="Выберите часовой пояс"/>
+        </formLayout>
+        <hbox id="detailActions">
+            <button id="saveAndCloseButton" action="saveAction"/>
+            <button id="closeButton" action="closeAction"/>
+        </hbox>
+    </layout>
+</view>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<menu-config xmlns="http://jmix.io/schema/flowui/menu">
+
+    <menu id="application" title="msg://com.company.tenderlist/menu.application.title" opened="true">
+        <item view="User.list" title="msg://com.company.tenderlist.view.user/UserListView.title"/>
+        <item view="Card.list" title="msg://com.company.tenderlist.view.card/cardListView.title"/>
+        <item view="Department.list" title="msg://com.company.tenderlist.view.department/departmentListView.title"/>
+        <item view="ConstructionObject.list"
+              title="msg://com.company.tenderlist.view.constructionobject/constructionObjectListView.title"/>
+        <item view="ContractingCompany.list"
+              title="msg://com.company.tenderlist.view.contractingcompany/contractingCompanyListView.title"/>
+        <item view="ProjectManager.list"
+              title="msg://com.company.tenderlist.view.projectmanager/projectManagerListView.title"/>
+    </menu>
+
+</menu-config>

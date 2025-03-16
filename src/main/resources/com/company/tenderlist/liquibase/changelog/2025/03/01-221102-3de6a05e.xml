@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd"
+        objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+    <changeSet id="1" author="tlist">
+        <dropForeignKeyConstraint baseTableName="card" constraintName="fk_card_on_project_manager"/>
+    </changeSet>
+    <changeSet id="2" author="tlist">
+        <addForeignKeyConstraint baseColumnNames="PROJECT_MANAGER_ID" baseTableName="CARD"
+                                 constraintName="FK_CARD_ON_PROJECT_MANAGER" referencedColumnNames="ID"
+                                 referencedTableName="PROJECT_MANAGER"/>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<view xmlns="http://jmix.io/schema/flowui/view"
+      xmlns:c="http://jmix.io/schema/flowui/jpql-condition"
+      title="msg://cardListView.title"
+      focusComponent="cardsDataGrid">
+    <data>
+        <collection id="cardsDc"
+                    class="com.company.tenderlist.entity.Card">
+            <fetchPlan extends="_instance_name">
+                <property name="constructionObject" fetchPlan="_instance_name">
+                    <property name="address"/>
+                </property>
+                <property name="projectManagerName" fetchPlan="_base"/>
+                <property name="nameOfContractingCompany" fetchPlan="_instance_name"/>
+                <property name="numberOfCard"/>
+                <property name="tenderStatus"/>
+                <property name="dueDate"/>
+                <property name="planedTenderDate"/>
+                <property name="factTenderDate"/>
+                <property name="changeTenderDate"/>
+                <property name="projectDocumentationType"/>
+                <property name="planedDateOfDocumentationIssue"/>
+                <property name="factDateOfDocumentationIssue"/>
+                <property name="planedDateOfTechnicalTaskIssue"/>
+                <property name="factDateOfTechnicalTaskIssue"/>
+                <property name="planedDateOfTechnicalTaskAgree"/>
+                <property name="factDateOfTechnicalTaskAgree"/>
+                <property name="dateOfSheduleAgree"/>
+                <property name="dateOfContractConclusion"/>
+                <property name="numberOfContract"/>
+                <property name="notesOfProjectManager"/>
+                <property name="notesOfManager"/>
+            </fetchPlan>
+            <loader id="cardsDl">
+                <query>
+                    <![CDATA[select e from Card e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+        <urlQueryParameters>
+            <genericFilter component="genericFilter"/>
+            <pagination component="pagination"/>
+        </urlQueryParameters>
+    </facets>
+    <actions>
+        <action id="selectAction" type="lookup_select"/>
+        <action id="discardAction" type="lookup_discard"/>
+    </actions>
+    <layout>
+        <genericFilter id="genericFilter"
+                       dataLoader="cardsDl">
+            <properties include=".*"/>
+        </genericFilter>
+        <hbox id="buttonsPanel" classNames="buttons-panel">
+            <button id="createButton" action="cardsDataGrid.create" text="msg://createButton.text"/>
+            <button id="editButton" action="cardsDataGrid.edit" text="msg://editButton.text"/>
+            <button id="removeButton" action="cardsDataGrid.remove" text="msg://removeButton.text"/>
+            <simplePagination id="pagination" dataLoader="cardsDl"/>
+        </hbox>
+        <dataGrid id="cardsDataGrid"
+                  width="100%"
+                  minHeight="20em"
+                  dataContainer="cardsDc"
+                  columnReorderingAllowed="true">
+            <actions>
+                <action id="create" type="list_create"/>
+                <action id="edit" type="list_edit"/>
+                <action id="remove" type="list_remove"/>
+            </actions>
+            <columns resizable="true">
+                <column property="numberOfCard"/>
+                <column property="tenderStatus"/>
+                <column property="name"/>
+                <column property="constructionObject"/>
+                <column property="projectManagerName"/>
+                <column property="dueDate"/>
+                <column property="planedTenderDate"/>
+                <column property="factTenderDate"/>
+                <column property="changeTenderDate"/>
+                <column property="projectDocumentationType"/>
+                <column property="planedDateOfDocumentationIssue"/>
+                <column property="factDateOfDocumentationIssue"/>
+                <column property="planedDateOfTechnicalTaskIssue"/>
+                <column property="factDateOfTechnicalTaskIssue"/>
+                <column property="planedDateOfTechnicalTaskAgree"/>
+                <column property="factDateOfTechnicalTaskAgree"/>
+                <column property="dateOfSheduleAgree"/>
+                <column property="dateOfContractConclusion"/>
+                <column property="numberOfContract"/>
+                <column property="nameOfContractingCompany"/>
+                <column property="notesOfProjectManager"/>
+                <column property="notesOfManager"/>
+            </columns>
+        </dataGrid>
+        <hbox id="lookupActions" visible="false">
+            <button id="selectButton" action="selectAction"/>
+            <button id="discardButton" action="discardAction"/>
+        </hbox>
+    </layout>
+</view>
