@@ -242,14 +242,6 @@ public class Card {
         return name == null ? null : TypeOfWork.fromId(name);
     }
 
-    public TenderStatus getTenderStatus() {
-        return tenderStatus == null ? null : TenderStatus.fromId(tenderStatus);
-    }
-
-    public void setTenderStatus(TenderStatus tenderStatus) {
-        this.tenderStatus = tenderStatus == null ? null : tenderStatus.getId();
-    }
-
     public Integer getVersion() {
         return version;
     }
